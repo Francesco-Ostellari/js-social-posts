@@ -11,11 +11,14 @@ function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const team = [
+// data
+moment.defaultFormat = "DD.MM.YYYY HH:mm";
+
+const post = [
   {
     name: 'Pippo Rossi',
     picProfile: getRndInteger (1, 200),
-    date: '6/4/2021',
+    date: moment('06.04.2021', moment.defaultFormat).fromNow(),
     text: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.',
     image: getRndInteger (1, 200),
     likes: getRndInteger(1, 200)
@@ -24,7 +27,7 @@ const team = [
   {
     name: 'Pluto Bianchi',
     picProfile: getRndInteger (1, 200),
-    date: '2/8/2021',
+    date: moment('02.08.2021', moment.defaultFormat).fromNow(),
     text: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.',
     image: getRndInteger (1, 200),
     likes: getRndInteger(1, 200)
@@ -33,15 +36,13 @@ const team = [
   {
     name: 'Paperino Neri',
     picProfile: getRndInteger (1, 200),
-    date: '8/10/2021',
+    date: moment('08.10.2021', moment.defaultFormat).fromNow(),
     text: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.',
     likes: getRndInteger(1, 200)
   },
-
-
 ];
 
-//funzione che stampa le card
+//funzione che stampa i post
 function printCards(arrayList, container) {
   container.innerHTML = '';
   for (let index = 0; index < arrayList.length; index++) {
@@ -56,7 +57,7 @@ function printCards(arrayList, container) {
                   </div>
                   <div class="post-meta__data">
                       <div class="post-meta__author">${object.name}</div>
-                      <div class="post-meta__time"${object.date}</div>
+                      <div class="post-meta__time">${object.date}</div>
                   </div>                    
               </div>
           </div>
@@ -78,10 +79,20 @@ function printCards(arrayList, container) {
               </div> 
           </div>            
       </div>`;
-
     container.innerHTML += layoutDiv;
+  
+    let button = document.querySelector('.like-button');
+    console.log(button);
+    button.addEventListener('click', function () {
+      button.classList.add('like-button--liked');
+      let containerLike = (document.getElementById('like-counter-1'));
+      let numberLike = parseInt(containerLike.innerText);
+      numberLike = numberLike + 1;
+      containerLike.innerHTML = numberLike;
+      console.log(numberLike);
+    });
   }
 }
 
 const container = document.querySelector('.posts-list');
-printCards(team, container);
+printCards(post, container);
