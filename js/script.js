@@ -5,28 +5,37 @@ Per le immagini va bene utilizzare qualsiasi servizio di placeholder ad es.Unspl
   - Prendendo come riferimento il layout di esempio presente nell’html, stampiamo i post del nostro feed.
 - Rendiamo il tasto “Mi Piace” cliccabile con incremento del counter dei likes. */
 
+
+//funzione che genera numeri random per le immagini e per i likes
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 const team = [
   {
     name: 'Pippo Rossi',
-    picProfile: 'profile.jpg',
+    picProfile: getRndInteger (1, 200),
     date: '6/4/2021',
     text: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.',
-    image: 'image.jpg'
+    image: getRndInteger (1, 200),
+    likes: getRndInteger(1, 200)
   },
   
   {
     name: 'Pluto Bianchi',
-    picProfile: 'profile.jpg',
+    picProfile: getRndInteger (1, 200),
     date: '2/8/2021',
     text: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.',
-    image: 'image.jpg'
+    image: getRndInteger (1, 200),
+    likes: getRndInteger(1, 200)
   },
 
   {
     name: 'Paperino Neri',
-    picProfile: 'profile.jpg',
+    picProfile: getRndInteger (1, 200),
     date: '8/10/2021',
     text: 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.',
+    likes: getRndInteger(1, 200)
   },
 
 
@@ -43,7 +52,7 @@ function printCards(arrayList, container) {
           <div class="post__header">
               <div class="post-meta">                    
                   <div class="post-meta__icon">
-                      <img class="profile-pic" src="img/${object.picProfile}" alt="Phil Mangione">                    
+                      <img class="profile-pic" src="https://unsplash.it/300/300?image=${object.picProfile}" alt="${object.name}">                    
                   </div>
                   <div class="post-meta__data">
                       <div class="post-meta__author">${object.name}</div>
@@ -53,7 +62,7 @@ function printCards(arrayList, container) {
           </div>
           <div class="post__text">${object.text}</div>
           <div class="post__image">
-              <img src="img/${object.image}" alt="">
+              <img src="https://unsplash.it/600/300?image=${object.image}" alt="">
           </div>
           <div class="post__footer">
               <div class="likes js-likes">
@@ -64,7 +73,7 @@ function printCards(arrayList, container) {
                       </a>
                   </div>
                   <div class="likes__counter">
-                      Piace a <b id="like-counter-1" class="js-likes-counter">80</b> persone
+                      Piace a <b id="like-counter-1" class="js-likes-counter">${object.likes}</b> persone
                   </div>
               </div> 
           </div>            
