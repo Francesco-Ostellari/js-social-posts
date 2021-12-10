@@ -81,18 +81,39 @@ function printCards(arrayList, container) {
       </div>`;
     container.innerHTML += layoutDiv;
   
-    let button = document.querySelector('.like-button');
-    console.log(button);
-    button.addEventListener('click', function () {
-      button.classList.add('like-button--liked');
-      let containerLike = (document.getElementById('like-counter-1'));
-      let numberLike = parseInt(containerLike.innerText);
-      numberLike = numberLike + 1;
-      containerLike.innerHTML = numberLike;
-      console.log(numberLike);
-    });
   }
 }
 
 const container = document.querySelector('.posts-list');
 printCards(post, container);
+
+
+
+let like = document.querySelectorAll('.post__footer');
+
+for (let index = 0; index < like.length; index++) {
+  
+  const miPiace = like[index];
+
+  const button = miPiace.querySelector('.like-button');
+  
+  const containerLike = miPiace.querySelector('.js-likes-counter');
+  let numberLike = (containerLike.innerText);
+ 
+  let postLiked = false;
+  
+  button.addEventListener('click', function (event) {
+    if (postLiked == false) {
+      this.classList.add('like-button--liked');
+      numberLike++;
+      postLiked = true;
+      event.preventDefault();
+    } else {
+      this.classList.remove('like-button--liked');
+      numberLike--;
+      postLiked = false;
+      event.preventDefault();
+    }
+    containerLike.innerText = numberLike;
+  });
+}
